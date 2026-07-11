@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: morphscrapper
-Version: 0.1.0
+Version: 0.1.3
 Summary: A multi-modal web scraping package for extracting text, images, audio, and video.
 Author: Chirag
 License: MIT
@@ -33,153 +33,157 @@ Requires-Dist: moviepy>=1.0.3; extra == "all"
 Dynamic: license-file
 Dynamic: requires-python
 
-# 🔮 morph
+<p align="center">
+  <img src="https://raw.githubusercontent.com/chiragferwani/morph/main/morph.png" alt="morphscrapper logo" width="120px" />
+</p>
 
-**A multi-modal web scraping package for Python.**
+<h1 align="center">🔮 morphscrapper</h1>
 
-Extract text, images, audio, and video from any website. Convert media with OCR, speech recognition, and video processing.
+<p align="center">
+  <strong>A sophisticated, multi-modal web scraping and media conversion suite for Python.</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/chiragferwani/morph/actions"><img src="https://img.shields.io/github/actions/workflow/status/chiragferwani/morph/tests.yml?branch=main&style=flat-square" alt="Build Status"></a>
+  <a href="https://pypi.org/project/morphscrapper"><img src="https://img.shields.io/pypi/v/morphscrapper?color=blue&style=flat-square" alt="PyPI version"></a>
+  <a href="https://pypi.org/project/morphscrapper"><img src="https://img.shields.io/pypi/pyversions/morphscrapper?style=flat-square" alt="Python Versions"></a>
+  <a href="https://github.com/chiragferwani/morph/blob/main/LICENSE"><img src="https://img.shields.io/github/license/chiragferwani/morph?style=flat-square" alt="License"></a>
+</p>
+
+---
+
+## 📖 Overview
+
+`morphscrapper` is a modular Python package designed to extract and convert diverse content types from the web. It bridges the gap between raw web scraping and advanced media processing, allowing developers to extract text, images, audio, and video resources, and immediately perform operations like **OCR (Optical Character Recognition)**, **speech recognition**, and **video manipulation**.
+
+It features a robust Python API, a full-featured Command-Line Interface (CLI), and a modern, light-themed **Neo-Brutalism web dashboard** for interactive scraping and conversion.
+
+---
+
+## 🛠️ Tech Stack & Dependencies
+
+`morphscrapper` leverages modern, reliable Python libraries:
+
+| Layer | Technology | Icons / Badges |
+| :--- | :--- | :--- |
+| **Core Scraping** | `requests`, `BeautifulSoup4` | ![Requests](https://img.shields.io/badge/Requests-v2.34-005C94?style=flat-square) ![BS4](https://img.shields.io/badge/BeautifulSoup4-v4.15-green?style=flat-square) |
+| **OCR Engine** | `pytesseract`, `Pillow` (Tesseract OCR wrapper) | ![Tesseract](https://img.shields.io/badge/Tesseract--OCR-Supported-brightgreen?style=flat-square) |
+| **Speech-to-Text** | `SpeechRecognition`, `pydub` | ![Speech](https://img.shields.io/badge/SpeechRec-v3.17-orange?style=flat-square) |
+| **Video Processing** | `moviepy` (FFmpeg-powered) | ![FFmpeg](https://img.shields.io/badge/FFmpeg-Supported-blueviolet?style=flat-square) |
+| **Web Dashboard** | `Flask`, Vanilla HTML5, CSS3, JavaScript | ![Flask](https://img.shields.io/badge/Flask-v3.1-black?style=flat-square) ![Theme](https://img.shields.io/badge/Design-Neo--Brutalism--Light-yellow?style=flat-square) |
 
 ---
 
 ## ✨ Features
 
-- **📄 Text Scraping** — Extract all visible text from any webpage
-- **🖼️ Image Scraping** — Find and download all images (JPG, PNG, etc.)
-- **🎵 Audio Scraping** — Detect and download audio files (MP3, WAV)
-- **🎬 Video Scraping** — Find and download video files (MP4, WEBM, MOV)
-- **🔤 Image → Text** — OCR using Tesseract to read text from images
-- **🎤 Audio → Text** — Speech recognition to transcribe audio
-- **🎞️ Video Processing** — Extract audio, text, or frames from videos
-- **📦 Export** — Save results as TXT, CSV, JSON, or ZIP
-- **💻 CLI** — Full command-line interface
-- **🌐 Web Interface** — Beautiful dark-themed browser UI
+- **📄 Document Text Scraping** — Extracts clean, structural content from websites.
+- **🖼️ Image Scraping & Filtering** — Locates all image formats, with options to download specific extensions or package them into ZIPs on-demand.
+- **🎵 Audio & Video Extraction** — Finds direct media tracks and embeds.
+- **🔤 Optical Character Recognition (OCR)** — Extracts text from local or scraped image files using Tesseract OCR.
+- **🎤 Speech Transcription** — Transcribes WAV/MP3 files into readable text.
+- **🎞️ Video Manipulation** — Converts video clips to audio tracks, extracts frames at custom intervals, or transcribes speech within video tracks.
+- **💻 Desktop CLI** — Clean command parser with JSON, CSV, and TXT exporting formats.
+- **🌐 Web UI** — A modern web dashboard built around high-contrast Neo-Brutalism principles with drag-and-drop uploads.
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Installation
 
-### Installation
-
+### Core Package (Basic Scraping)
 ```bash
-# Clone the repository
-git clone https://github.com/chiragferwani/morph.git
-cd morph
-
-# Install the package
-pip install .
-
-# Or install with all optional features
-pip install ".[all]"
+pip install morphscrapper
 ```
 
-### Python API
+### With Optional Media Processing Features
+```bash
+# To install with OCR, Audio, and Video conversion dependencies:
+pip install "morphscrapper[all]"
+```
+
+### System Dependencies
+For full conversion capabilities, make sure the system binaries are installed on your OS:
+```bash
+# Ubuntu/Debian
+sudo apt update
+sudo apt install -y tesseract-ocr ffmpeg
+
+# macOS
+brew install tesseract ffmpeg
+```
+
+---
+
+## 💻 Usage & Quick Start
+
+### 1. Python API
 
 ```python
-from morph import scrape_text, scrape_images
+from morphscrapper import scrape_text, scrape_images, image_to_text
 
-# Scrape text from a website
+# Scrape document content from a website
 result = scrape_text("https://example.com")
-print(result["text"])
+if result["success"]:
+    print(f"Page Title: {result['title']}")
+    print(result["text"])
 
 # Scrape images
-result = scrape_images("https://example.com")
-for image in result["images"]:
-    print(image["src"])
+img_result = scrape_images("https://example.com")
+print(f"Found {img_result['count']} images.")
+
+# Perform local OCR (requires Tesseract)
+ocr_text = image_to_text("receipt.png")
+if ocr_text["success"]:
+    print(ocr_text["text"])
 ```
 
-### CLI
+### 2. Command-Line Interface (CLI)
 
 ```bash
-# Scrape text
-morph scrape text https://example.com --output json
+# Scrape text from a URL and export as CSV
+morph scrape text https://example.com --output csv
 
 # Scrape and download images
 morph scrape images https://example.com --download
 
-# Convert image to text (OCR)
-morph convert image-to-text screenshot.png
+# Extract audio track from an MP4 file
+morph convert video-to-audio movie.mp4 --save-as audio.wav
 
-# Start the web interface
+# Start the Web GUI
 morph web
 ```
 
-### Web Interface
+---
 
-```bash
-morph web --port 5000
-```
+## 🌐 Neo-Brutalism Web Dashboard
 
-Then open `http://localhost:5000` in your browser.
+Run `morph web` or `python -m morph.cli.main web` to launch the local web server. The dashboard provides:
+1. **Interactive Scrapers**: Instant scraping for text, images, audio, or video.
+2. **On-Demand Package Download**: Download your scraping results as TXT, CSV, JSON, or package your images/audio/video files into a ZIP archive instantly.
+3. **Media Converters**: Drag-and-drop any local file below the scraper to instantly convert images to text, audio to text, or videos to frames and audio tracks, featuring real-time visual media players and galleries.
 
 ---
 
-## 📁 Project Structure
+## 📁 Repository Architecture
 
 ```
-morph-nlp1/
-├── morph/                    # Main package
-│   ├── __init__.py           # Package init, exports all public functions
-│   ├── cli/                  # Command-line interface
-│   │   └── main.py           # CLI entry point (argparse)
-│   ├── core/                 # Shared configuration
-│   │   └── config.py         # Constants (timeouts, headers, formats)
-│   ├── scrapers/             # Web scraping modules
-│   │   ├── text_scraper.py   # scrape_text()
-│   │   ├── image_scraper.py  # scrape_images()
-│   │   ├── audio_scraper.py  # scrape_audio()
-│   │   └── video_scraper.py  # scrape_video()
-│   ├── converters/           # Media conversion modules
-│   │   ├── image_converter.py # image_to_text() — OCR
-│   │   ├── audio_converter.py # audio_to_text() — Speech Recognition
-│   │   └── video_converter.py # video_to_audio/text/images()
-│   ├── utils/                # Utility functions
-│   │   ├── downloader.py     # download_file()
-│   │   ├── exporter.py       # export_to_txt/csv/json/zip()
-│   │   └── validator.py      # validate_url(), check_connection()
-│   └── web/                  # Web interface
-│       ├── app.py            # Flask backend
-│       ├── templates/        # HTML templates
-│       └── static/           # CSS and JavaScript
-├── examples/                 # Usage examples
-├── tests/                    # Unit tests
-├── docs/                     # Documentation
-├── setup.py                  # Installation script
-├── pyproject.toml            # Modern packaging config
-├── requirements.txt          # Dependencies
-└── README.md                 # This file
+morphscrapper/
+├── morph/                    # Main package source
+│   ├── cli/                  # Command-line entry points
+│   ├── core/                 # Settings and static configuration
+│   ├── scrapers/             # Scraper scripts (text, image, audio, video)
+│   ├── converters/           # Media converters (OCR, speech, video)
+│   ├── utils/                # Downloaders, exporters, validators
+│   └── web/                  # Web server backend and static assets
+├── docs/                     # Full manuals (usage, install, API guides)
+├── examples/                 # Code usage demonstrations
+├── tests/                    # Unit testing suite
+├── pyproject.toml            # Package configuration
+├── setup.py                  # Package installer script
+└── README.md                 # Project README
 ```
-
----
-
-## 📋 Requirements
-
-### Core (Required)
-- Python 3.8+
-- `requests` — HTTP library
-- `beautifulsoup4` — HTML parser
-- `flask` — Web framework
-
-### Optional
-- `pytesseract` + `Pillow` — For OCR (image to text)
-- `SpeechRecognition` + `pydub` — For audio to text
-- `moviepy` — For video processing
-
-### System Dependencies
-- **Tesseract OCR** — `sudo apt install tesseract-ocr`
-- **FFmpeg** — `sudo apt install ffmpeg`
 
 ---
 
 ## 📄 License
 
-MIT License — see [LICENSE](LICENSE) for details.
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/my-feature`)
-3. Commit your changes (`git commit -am 'Add my feature'`)
-4. Push to the branch (`git push origin feature/my-feature`)
-5. Open a Pull Request
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

@@ -11,7 +11,7 @@ Usage:
 """
 
 # ---- Version information ----
-__version__ = "0.1.0"
+__version__ = "0.1.3"
 __author__ = "Chirag"
 
 # ---- Import all scraper functions so users can do: from morph import scrape_text ----

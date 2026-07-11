@@ -23,6 +23,9 @@ morph/utils/__init__.py
 morph/utils/downloader.py
 morph/utils/exporter.py
 morph/utils/validator.py
+morph/web/__init__.py
+morph/web/app.py
+morph/web/static/morph.png
 morph/web/static/script.js
 morph/web/static/style.css
 morph/web/templates/index.html

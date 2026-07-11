@@ -23,7 +23,7 @@ with open("requirements.txt", "r", encoding="utf-8") as req_file:
 setup(
     # ---- Basic package information ----
     name="morphscrapper",
-    version="0.1.0",
+    version="0.1.3",
     author="Chirag",
     description="A multi-modal web scraping package for extracting text, images, audio, and video.",
     long_description=long_description,
@@ -42,6 +42,7 @@ setup(
             "web/templates/*.html",
             "web/static/*.css",
             "web/static/*.js",
+            "web/static/*.png",
         ],
     },
 
