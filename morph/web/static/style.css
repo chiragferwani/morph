@@ -1,0 +1,659 @@
+/*
+ * morph Web Interface — Neo-Brutalism Light Theme
+ *
+ * Design philosophy:
+ *   • Bold black borders & thick box-shadows (the "brutal" look)
+ *   • Bright, punchy accent colours on a clean off-white background
+ *   • Inter font throughout for clean modern typography
+ *   • No rounded-everything: mix sharp corners with occasional roundness
+ */
+
+/* ============================================================
+   RESET & ROOT TOKENS
+   ============================================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* ---- Colours ---- */
+    --bg:           #f5f0e8;        /* warm off-white page background */
+    --bg-card:      #ffffff;        /* card background */
+    --text:         #1a1a1a;        /* primary text */
+    --text-muted:   #6b6b6b;        /* secondary text */
+    --border:       #1a1a1a;        /* the bold black borders */
+    --shadow:       #1a1a1a;        /* brutal box-shadow colour */
+
+    --green:        #14532d;        /* matches the morph logo */
+    --green-light:  #bbf7d0;        /* light green tint */
+    --green-bg:     #dcfce7;        /* very light green background */
+
+    --accent:       #facc15;        /* yellow accent */
+    --accent-hover: #eab308;
+
+    --blue:         #3b82f6;
+    --blue-light:   #dbeafe;
+
+    --red:          #ef4444;
+    --red-light:    #fee2e2;
+
+    --purple:       #a855f7;
+    --purple-light: #f3e8ff;
+
+    /* ---- Sizing ---- */
+    --border-w:     3px;
+    --shadow-offset: 5px;
+    --radius:       0px;            /* sharp corners = neo-brutal */
+}
+
+/* ============================================================
+   BODY & TYPOGRAPHY
+   ============================================================ */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--green);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+a:hover { color: var(--text); }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header {
+    border-bottom: var(--border-w) solid var(--border);
+    background: var(--bg-card);
+}
+
+.header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    /* Brutal frame around the logo */
+    border: var(--border-w) solid var(--border);
+    padding: 4px;
+    background: var(--green-bg);
+}
+
+.logo-text {
+    font-size: 1.75rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1;
+    color: var(--green);
+}
+
+.logo-tagline {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+    margin-top: 2px;
+}
+
+/* ============================================================
+   MAIN LAYOUT
+   ============================================================ */
+.main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+}
+
+/* ============================================================
+   SECTION HEADERS  (01 Scrape a Website …)
+   ============================================================ */
+.section {
+    margin-top: 48px;
+}
+
+.section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+.section-number {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--bg-card);
+    background: var(--green);
+    padding: 3px 10px;
+    border: var(--border-w) solid var(--border);
+    letter-spacing: 1px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.section-desc {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 16px;
+    max-width: 560px;
+}
+
+/* ============================================================
+   CARDS  (neo-brutal: thick border + offset shadow)
+   ============================================================ */
+.card {
+    background: var(--bg-card);
+    border: var(--border-w) solid var(--border);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow);
+    padding: 28px;
+    margin-top: 16px;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+    box-shadow: calc(var(--shadow-offset) + 2px) calc(var(--shadow-offset) + 2px) 0 var(--shadow);
+    transform: translate(-1px, -1px);
+}
+
+.card-results {
+    margin-top: 20px;
+}
+
+.card-heading {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
+.form-group {
+    margin-bottom: 18px;
+    flex: 1;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+/* Inputs & selects share the brutal border style */
+.input,
+.select {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--bg);
+    border: var(--border-w) solid var(--border);
+    outline: none;
+    transition: box-shadow 0.15s ease;
+}
+
+.input:focus,
+.select:focus {
+    box-shadow: 3px 3px 0 var(--green);
+}
+
+.input::placeholder {
+    color: #aaa;
+}
+
+.select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%231a1a1a' viewBox='0 0 16 16'%3E%3Cpath d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+}
+
+/* ============================================================
+   FILE UPLOAD (drag-and-drop zone)
+   ============================================================ */
+.file-upload {
+    position: relative;
+    border: var(--border-w) dashed var(--border);
+    background: var(--bg);
+    padding: 28px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.file-upload:hover {
+    background: var(--green-light);
+}
+
+.file-input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.file-upload-icon {
+    font-size: 1.6rem;
+}
+
+.file-selected {
+    background: var(--green-bg) !important;
+}
+
+.file-selected .file-upload-inner {
+    color: var(--green);
+}
+
+/* ============================================================
+   BUTTONS  (neo-brutal: solid bg + border + offset shadow)
+   ============================================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    border: var(--border-w) solid var(--border);
+    cursor: pointer;
+    transition: all 0.12s ease;
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: none !important;
+}
+
+/* Primary — green */
+.btn-primary {
+    background: var(--green);
+    color: #fff;
+    padding: 14px 28px;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow);
+}
+.btn-primary:hover {
+    background: #166534;
+}
+
+/* Secondary — yellow accent */
+.btn-secondary {
+    background: var(--accent);
+    color: var(--text);
+    padding: 14px 28px;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--shadow);
+}
+.btn-secondary:hover {
+    background: var(--accent-hover);
+}
+
+/* Accent — small download buttons */
+.btn-accent {
+    background: var(--blue);
+    color: #fff;
+    padding: 8px 18px;
+    box-shadow: 3px 3px 0 var(--shadow);
+}
+.btn-accent:hover {
+    background: #2563eb;
+}
+
+/* Outline — header link */
+.btn-outline {
+    background: transparent;
+    color: var(--text);
+    padding: 8px 16px;
+    box-shadow: 3px 3px 0 var(--shadow);
+}
+.btn-outline:hover {
+    background: var(--green-light);
+}
+
+/* Sizes */
+.btn-full { width: 100%; }
+.btn-sm   { font-size: 0.82rem; }
+
+/* Disabled */
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Spinner inside button */
+.btn-loader {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+.btn-secondary .spinner {
+    border-color: rgba(0,0,0,0.2);
+    border-top-color: var(--text);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   STATUS MESSAGES
+   ============================================================ */
+.status-msg {
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: var(--border-w) solid var(--border);
+    animation: slideDown 0.2s ease;
+}
+
+.status-msg.success {
+    background: var(--green-bg);
+    color: var(--green);
+}
+
+.status-msg.error {
+    background: var(--red-light);
+    color: var(--red);
+}
+
+.status-msg.info {
+    background: var(--blue-light);
+    color: var(--blue);
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   PROGRESS BAR
+   ============================================================ */
+.progress-wrap {
+    margin-top: 16px;
+    animation: slideDown 0.2s ease;
+}
+
+.progress-track {
+    height: 10px;
+    background: var(--bg);
+    border: var(--border-w) solid var(--border);
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--green),
+        var(--green) 8px,
+        var(--green-light) 8px,
+        var(--green-light) 16px
+    );
+    background-size: 22px 22px;
+    animation: barberpole 0.6s linear infinite;
+    transition: width 0.3s ease;
+}
+
+@keyframes barberpole {
+    from { background-position: 0 0; }
+    to   { background-position: 22px 0; }
+}
+
+.progress-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-top: 6px;
+    text-align: center;
+}
+
+/* ============================================================
+   RESULTS SECTION
+   ============================================================ */
+.results-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* Badges (word count, title) */
+.badge-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid var(--border);
+    background: var(--green-bg);
+    color: var(--green);
+}
+
+.badge-alt {
+    background: var(--purple-light);
+    color: var(--purple);
+}
+
+.result-count {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* ============================================================
+   TEXT VIEWER
+   ============================================================ */
+.text-viewer {
+    max-height: 380px;
+    overflow-y: auto;
+    padding: 18px;
+    background: var(--bg);
+    border: var(--border-w) solid var(--border);
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--text);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.text-viewer::-webkit-scrollbar { width: 8px; }
+.text-viewer::-webkit-scrollbar-track { background: var(--bg); }
+.text-viewer::-webkit-scrollbar-thumb {
+    background: var(--green-light);
+    border: 1px solid var(--border);
+}
+
+/* ============================================================
+   IMAGE GALLERY
+   ============================================================ */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+}
+
+.gallery-item {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: var(--border-w) solid var(--border);
+    box-shadow: 3px 3px 0 var(--shadow);
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.gallery-item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--shadow);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item .image-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 6px 8px;
+    background: rgba(255,255,255,0.9);
+    border-top: 2px solid var(--border);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* ============================================================
+   MEDIA LIST  (Audio & Video)
+   ============================================================ */
+.media-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.media-item {
+    padding: 14px;
+    background: var(--bg);
+    border: var(--border-w) solid var(--border);
+    transition: box-shadow 0.12s ease;
+}
+
+.media-item:hover {
+    box-shadow: 3px 3px 0 var(--shadow);
+}
+
+.media-item-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.media-item-url {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    word-break: break-all;
+    margin-bottom: 10px;
+}
+
+.media-item audio,
+.media-item video {
+    width: 100%;
+    outline: none;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+    text-align: center;
+    padding: 28px 24px;
+    border-top: var(--border-w) solid var(--border);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    background: var(--bg-card);
+}
+
+.footer a {
+    font-weight: 700;
+    color: var(--green);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .card { padding: 20px; }
+
+    .header-inner { flex-direction: column; gap: 12px; }
+
+    .logo-text { font-size: 1.4rem; }
+
+    .section-title { font-size: 1.25rem; }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    }
+}

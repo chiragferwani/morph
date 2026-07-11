@@ -1,0 +1,9 @@
+# Include non-Python files in the distribution
+include LICENSE
+include README.md
+include CHANGELOG.md
+include requirements.txt
+
+# Include web interface files
+recursive-include morph/web/templates *.html
+recursive-include morph/web/static *.css *.js

@@ -1,0 +1,18 @@
+# ============================================================
+# morph - Requirements
+# ============================================================
+# Core dependencies (required for basic scraping)
+requests>=2.28.0
+beautifulsoup4>=4.11.0
+flask>=2.2.0
+
+# Optional: OCR (image to text)
+# pytesseract>=0.3.10
+# Pillow>=9.0.0
+
+# Optional: Audio processing (audio to text)
+# SpeechRecognition>=3.8.0
+# pydub>=0.25.0
+
+# Optional: Video processing
+# moviepy>=1.0.3
